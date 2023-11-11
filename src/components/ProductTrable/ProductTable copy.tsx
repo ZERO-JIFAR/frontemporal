@@ -60,17 +60,17 @@ const ProductTable = () => {
   return (
     <>
     <Button 
-     onClick={() =>handleClick("Nuevo Empleado",initializableNewProduct(),ModalType.CREATE)}>
-      Nuevo Empleado </Button>
+     onClick={() =>handleClick("Nuevo Producto",initializableNewProduct(),ModalType.CREATE)}>
+      Nuevo Producto </Button>
       {isLoading ? <Loader /> : (
         <Table hover>
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Telefono</th>
-              <th>Email</th>
-              <th>Usuario</th>
+              <th>Titulo</th>
+              <th>Precio</th>
+              <th>Descripcion</th>
+              <th>Categoria</th>
+              <th>Imagen</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>
@@ -79,12 +79,12 @@ const ProductTable = () => {
             {products.map((product) => (
               <tr key={product.id}>
                 <td>{product.title}</td>
-                <td>{product.title}</td>
                 <td>{product.price}</td>
-                <td>{product.title}</td>
-                <td>{product.title}</td>
-                <td><EditButton onClick={() => handleClick("Editar datos", product, ModalType.UPDATE)}/></td>
-                <td><DeleteButton onClick={() => handleClick("Borrar empleado", product, ModalType.DELETE)}/></td>
+                <td>{product.description}</td>
+                <td>{product.category}</td>
+                <td><img src={product.image}alt={product.title} style={{ width: "50px" }}/></td>
+                <td><EditButton onClick={() => handleClick("Editar producto", product, ModalType.UPDATE)}/></td>
+                <td><DeleteButton onClick={() => handleClick("Borrar producto", product, ModalType.DELETE)}/></td>
               </tr>
             ))}
           </tbody>
