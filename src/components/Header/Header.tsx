@@ -9,8 +9,7 @@ import {
 } from "react-bootstrap";
 import "./header.css";
 import { useNavigate } from "react-router-dom";
-import { Cart } from "react-bootstrap-icons";
-
+import { Cart, Person } from "react-bootstrap-icons";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -28,8 +27,11 @@ const Header = () => {
         <Container>
           <Nav className="container">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <NavbarCollapse id="basic-navbar-nav"><Navbar.Brand onClick={() => navigate("/")}
-                className=" col-sm-1	col-md-1	col-lg-1	col-xl-1">
+            <NavbarCollapse id="basic-navbar-nav">
+              <Navbar.Brand
+                onClick={() => navigate("/")}
+                className=" col-sm-1	col-md-1	col-lg-1	col-xl-1"
+              >
                 {
                   <img
                     src="src/assets/images/logo.svg"
@@ -46,7 +48,7 @@ const Header = () => {
                   />
                 </Col>
               </Form>
-              <Nav className="me-auto col-sm-6	col-md-6	col-lg-6	col-xl-6">
+              <Nav className="me-auto col-sm-4	col-md-4	col-lg-4	col-xl-4">
                 <Nav.Link onClick={() => navigate("/")}>Inicio</Nav.Link>
                 <Nav.Link onClick={() => navigate("/promociones")}>
                   Promociones
@@ -56,8 +58,20 @@ const Header = () => {
                   Contactanos
                 </Nav.Link>
               </Nav>
-              <Cart className="col-sm-1	col-md-1	col-lg-1	col-xl-1" />
-              <Button className="col-sm-1	col-md-1	col-lg-1	col-xl-1">HOLA</Button>
+              <Button
+                onClick={() => navigate("/carrito")}
+                className="col-sm-2	col-md-2	col-lg-2	col-xl-2" style={{margin:'10px'}}
+              >
+                <Cart />
+                Mi Carrito
+              </Button>
+              <Button
+                onClick={() => navigate("/")}
+                className="col-sm-2	col-md-2	col-lg-2	col-xl-2" style={{margin:'10px'}}
+              >
+                <Person />
+                Ingresar
+              </Button>
             </NavbarCollapse>
           </Nav>
         </Container>
