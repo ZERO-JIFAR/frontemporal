@@ -1,4 +1,3 @@
-import React from "react";
 import "./footer.css";
 
 const Footer = () => {
@@ -14,6 +13,7 @@ const Footer = () => {
         <p>Phone: (123) 456-67890</p>
       </div>
     </div>
+    
   );
 };
 

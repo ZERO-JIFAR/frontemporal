@@ -1,0 +1,15 @@
+.aboutUsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  margin-top: 2vh;
+  text-align: center;
+}
+
+.features {
+  
+  display: flex;
+  flex-direction: row;
+  gap: 2vh;
+  justify-content: center;
+}
