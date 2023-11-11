@@ -1,31 +1,15 @@
-.footerContainer {
-  margin-top: 2vh;
-  width: 100%;
-  display: flex;
-<<<<<<< HEAD
-  height: 20vh;
-=======
->>>>>>> 16443826f1208787bae23b4edbf117fe812f2c7a
-  flex-direction: row;
-  justify-content: center;
-  gap: 30vh;
-  background-color: rgb(33, 37, 41);
-  color: white;
-<<<<<<< HEAD
-  position: absolute;
-  bottom: 0;
-  left: 0;
-=======
+/* Footer.css */
 
->>>>>>> 16443826f1208787bae23b4edbf117fe812f2c7a
+.footer {
+  background-color: #333; /* Fondo oscuro por defecto */
+  color: #fff;
+  padding: 20px 0;
 }
-.ourCompany {
-  margin-top: 1vh;
-  display: flex;
-  flex-direction: column;
-}
-.contactUs {
-  margin-top: 1vh;
-  display: flex;
-  flex-direction: column;
+
+@media (prefers-color-scheme: light) {
+  /* Si el dispositivo prefiere un tema claro, ajusta los estilos aquí */
+  .footer {
+    background-color: #f8f9fa; /* Fondo claro */
+    color: #333;
+  }
 }

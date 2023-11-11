@@ -4,6 +4,7 @@ import {
   Container,
   Form,
   Nav,
+  NavDropdown,
   Navbar,
   NavbarCollapse,
 } from "react-bootstrap";
@@ -17,13 +18,7 @@ const Header = () => {
     <div>
       {/*col-	col-sm-	col-md-	col-lg-	col-xl-          Esto es de Bootstrap y sirve para darle el width a cada elemento*/}
 
-      <Navbar
-        expand="md"
-        className="bg-body-tertiary"
-        bg="light"
-        data-bs-theme="light"
-        variant="light"
-      >
+      <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Nav className="container">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -48,26 +43,35 @@ const Header = () => {
                   />
                 </Col>
               </Form>
-              <Nav className="me-auto col-sm-4	col-md-4	col-lg-4	col-xl-4">
+              <Nav className="me-auto col-sm-4	col-md-4	col-lg-4	col-xl-4" >
                 <Nav.Link onClick={() => navigate("/")}>Inicio</Nav.Link>
                 <Nav.Link onClick={() => navigate("/promociones")}>
                   Promociones
                 </Nav.Link>
-                <Nav.Link onClick={() => navigate("/menu")}>Menú</Nav.Link>
-                <Nav.Link onClick={() => navigate("/contactanos")}>
-                  Contactanos
-                </Nav.Link>
+                <NavDropdown
+                  className="nav-dropdown-example"
+                  title="Categorías"
+                  menuVariant="dark"
+                >
+                  <NavDropdown.Item onClick={() => navigate("/search?hamburguesas")}>Hamburguesas</NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => navigate("/search?panchos")}>Panchos</NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => navigate("/search?pizzas")}>Pizzas</NavDropdown.Item>
+                  <NavDropdown.Item onClick={() => navigate("/search?papas_fritas")}>Papas Fritas</NavDropdown.Item> 
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={() => navigate("/search?bebidas")}>Bebidas</NavDropdown.Item>
+                </NavDropdown>
               </Nav>
               <Button
                 onClick={() => navigate("/carrito")}
-                className="col-sm-2	col-md-2	col-lg-2	col-xl-2" style={{margin:'10px'}}
+                className="col-sm-2	col-md-2	col-lg-2	col-xl-2"
+                style={{ margin: "10px" , textAlign:"center"}}
               >
-                <Cart />
-                Mi Carrito
+                <Cart /> Carrito
               </Button>
               <Button
-                onClick={() => navigate("/")}
-                className="col-sm-2	col-md-2	col-lg-2	col-xl-2" style={{margin:'10px'}}
+                onClick={() => navigate("/login")}
+                className="col-sm-2	col-md-2	col-lg-2	col-xl-2"
+                style={{ margin: "10px" }}
               >
                 <Person />
                 Ingresar
