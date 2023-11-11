@@ -3,7 +3,7 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./Footer.css";
-import { At, EnvelopeAt, PinMap, Whatsapp } from "react-bootstrap-icons";
+import { EnvelopeAt, PinMap, Whatsapp } from "react-bootstrap-icons";
 
 const Footer: React.FC = () => {
   return (

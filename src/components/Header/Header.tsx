@@ -43,8 +43,8 @@ const Header = () => {
                   />
                 </Col>
               </Form>
-              <Nav className="me-auto col-sm-4	col-md-4	col-lg-4	col-xl-4" >
-                <Nav.Link onClick={() => navigate("/")}>Inicio</Nav.Link>
+              <Nav className="me-auto col-sm-4	col-md-4	col-lg-4	col-xl-4" style={{margin:'10px'}}>
+                <Nav.Link onClick={() => navigate("/")}> Inicio</Nav.Link>
                 <Nav.Link onClick={() => navigate("/promociones")}>
                   Promociones
                 </Nav.Link>
@@ -73,8 +73,7 @@ const Header = () => {
                 className="col-sm-2	col-md-2	col-lg-2	col-xl-2"
                 style={{ margin: "10px" }}
               >
-                <Person />
-                Ingresar
+                <Person /> Ingresar
               </Button>
             </NavbarCollapse>
           </Nav>
