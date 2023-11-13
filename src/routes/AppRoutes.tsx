@@ -3,6 +3,7 @@ import Home from "../pages/home/Home";
 import Administracion from "../pages/Administracion";
 import Componentes from "../pages/Componentes";
 import Empleados from "../pages/Empleados";
+import Usuarios from "../pages/Usuarios";
 
 
 const AppRoutes: React.FC = () => {
@@ -16,6 +17,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/administracion" element={<Administracion/>}/>
         <Route path="/componentes" element={<Componentes/>}/>
         <Route path="/empleados" element={<Empleados/>}/>
+        <Route path="/usuarios" element={<Usuarios/>}/>
     </Routes>
 
   )

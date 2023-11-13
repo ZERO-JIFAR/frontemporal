@@ -16,7 +16,7 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <div>
-      {/*col-	col-sm-	col-md-	col-lg-	col-xl-          Esto es de Bootstrap y sirve para darle el width a cada elemento*/}
+      {/*col-	col-sm-	col-md-	col-lg-	col-xl- Esto es de Bootstrap y sirve para darle el width a cada elemento (12 son el total de la pantalla)*/}
 
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
