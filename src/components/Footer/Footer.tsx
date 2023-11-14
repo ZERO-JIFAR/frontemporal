@@ -7,7 +7,7 @@ import { EnvelopeAt, PinMap, Whatsapp } from "react-bootstrap-icons";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="footer">
+    <footer className="footer" id="footer">
       <Container>
         <Row>
           <Col md={6} className="text-center text-md-left mb-3 mb-md-0">

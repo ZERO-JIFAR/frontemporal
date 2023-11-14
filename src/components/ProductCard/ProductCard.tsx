@@ -1,57 +1,63 @@
-/*import { Formik } from 'formik';
-import { Form, Modal } from 'react-bootstrap';
-import * as Yup from 'yup';
-import { Cliente } from '../../types/Cliente';
-
-type FormRegisterProps = {
-  showModal: boolean;
-  handleClose:() => void;
-  createCliente: (newCliente: Cliente) => void;
-}
-
-const FormRegister: React.FC<FormRegisterProps> = ({showModal, handleClose, createCliente}) => {
-  
-  const validationSchema = Yup.object({
-    username: Yup.string().required('Este campo es obligatorio'),
-    password: Yup.string().required('Este campo es obligatorio'),    
-    nombre: Yup.string().required("Este campo es obligatorio"),
-    apellido: Yup.string().required("Este campo es obligatorio"),
-    telefono: Yup.string().required("Este campo es obligatorio"),
-    mail: Yup.string().email("Formato de correo electrónico inválido").required("Este campo es obligatorio"),
-    fechaAltaCliente: Yup.string().required("Este campo es obligatorio"),
-    calle: Yup.string().required("Este campo es obligatorio"),
-    nroCalle: Yup.number().required("Este campo es obligatorio").integer("Debe ser un número entero").positive("Debe ser mayor a 0"),
-    pisoDpto: Yup.number().integer("Debe ser un número entero").positive("Debe ser mayor o igual a 0"),
-    nroDpto: Yup.number().integer("Debe ser un número entero").positive("Debe ser mayor o igual a 0"),
-    localidad: Yup.object({
-      id: Yup.number().required("Este campo es obligatorio"),
-      nombreLocalidad: Yup.string().required("Este campo es obligatorio"),
-      codigoPostal: Yup.number().required("Este campo es obligatorio"),
-    }),
-  });
-
-  const formik = useFormik({
-    initialValues: {
-      nombre: '',
-      apellido: '',
-      telefono: 0,
-      mail: '',
-      estado: ''
-    }
-  })
-  
-  return (
-    <div>FormRegister</div>
-  )
-}
-
-export default FormRegister*/
+import React from "react";
+import { Button, Card, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { ArticuloManufacturado } from "../../types/ArticuloManufacturado";
+import { useCarrito } from "../CarritoProvider/CarritoProvider";
+import { detallesPedido } from "../../types/DetallePedido";
 
 
-const FormRegister = () => {
-    return (
-      <div>FormRegister</div>
-    )
+const ProductCard: React.FC<{ articuloManufacturado: ArticuloManufacturado }> = ({ articuloManufacturado }) => {
+  const navigate = useNavigate();
+  const { addToCart } = useCarrito();
+
+  const handleAddToCart = () => {
+    // Aquí estamos creando un objeto detallesPedido antes de agregarlo al carrito
+    const detalle: detallesPedido = {
+      id: 0, // Puedes asignar un valor único o dejar que el backend lo maneje
+      cantidad: 1, // Cantidad inicial, puedes ajustarla según tus necesidades
+      subtotal: articuloManufacturado.precioVenta,
+      subTotalCosto: 0, // Ajusta según tu lógica
+      articuloManufacturado,
+    };
+
+    addToCart(detalle);
+    console.log("Nuevo carrito:", detalle, "Agregado al carrito");
+  };
+
+  if (!articuloManufacturado) {
+    return null;
   }
-  
-  export default FormRegister
+
+  const {
+    nombreArticuloManufacturado,
+    descripcionArticuloManufacturado,
+    precioVenta,
+    urlImagen_AM,
+    categoriaArticuloManufacturado,
+  } = articuloManufacturado;
+
+  return (
+    <Col xs={12} md={6} lg={4}>
+      <Card style={{ width: "18rem", margin: "10px" }}>
+        <Card.Img variant="top" src={urlImagen_AM} alt={nombreArticuloManufacturado} />
+        <Card.Body>
+          <Card.Title>{nombreArticuloManufacturado}</Card.Title>
+          <Card.Title>{descripcionArticuloManufacturado}</Card.Title>
+          <Card.Text>
+            Precio: ${precioVenta}
+            <br />
+            Categoría: {categoriaArticuloManufacturado.nombreCategoriaArticuloManufacturado}
+          </Card.Text>
+          <Button variant="primary" onClick={() => navigate(`/detalle/${articuloManufacturado.id}`)}>
+            Ver más
+          </Button>
+          <Button variant="success" className="ms-2" onClick={handleAddToCart}>
+            Agregar al carrito
+          </Button>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
+};
+
+export default ProductCard;
