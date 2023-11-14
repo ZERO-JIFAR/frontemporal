@@ -6,24 +6,26 @@ import {
   Button,
   Form,
   NavDropdown,
-  NavbarCollapse,
 } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import useIsLoggedIn from "../../hooks/useIsLoggedIn";
+import useIsAdmin from "../../hooks/useIsAdmin";
 
 const Header = () => {
   // Utils
   const navigate = useNavigate();
   const isLoggedIn = useIsLoggedIn();
+  const isAdmin = useIsAdmin();
 
   // Handlers
   function onLogOut() {
     window.localStorage.removeItem("isLoggedIn");
+    window.localStorage.removeItem("isAdmin");
     navigate("/");
   }
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-tertiary">
       <Container>
         <Nav className="container">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -83,22 +85,59 @@ const Header = () => {
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="#footer">Contactanos</Nav.Link>
-              <Nav.Link onClick={() => navigate("/admin")}>Admin</Nav.Link>
-              {isLoggedIn && <Nav.Link onClick={onLogOut}>Log out</Nav.Link>}
+              {((isLoggedIn === true) && (isAdmin === true)) ? (
+                <Nav.Link onClick={() => navigate("/admin")}>Admin</Nav.Link>
+              ) : (
+                <Nav.Link onClick={() => navigate("/admin")}>NO ADMIN</Nav.Link>
+              )}
+              <Container>
+                <Form className="me-auto">
+                  🔆
+                  <Form.Check // prettier-ignore
+                    type="switch"
+                    id="custom-switch"
+                    label="🌙"
+                  />
+                </Form>
+              </Container>
             </Nav>
             <Navbar expand="lg">
               <Nav>
-                <Button
-                  className="btn btn-danger"
-                  onClick={() => navigate("/register")}
-                >
-                  Registrarse
-                </Button>
+                {isLoggedIn ? (
+                  <NavDropdown
+                    className="nav-dropdown-example"
+                    title="NOMBREUSUARIO"
+                    menuVariant="dark"
+                  >
+                    <NavDropdown.Item onClick={() => navigate("/profile")}>
+                      Mis Datos
+                    </NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => navigate("/pedidos")}>
+                      Mis Pedidos
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item onClick={onLogOut}>
+                      Cerrar Sesion
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                ) : (
+                  <Button
+                    style={{ margin: "10px" }}
+                    onClick={() => navigate("/login")}
+                  >
+                    Iniciar Sesion
+                  </Button>
+                )}
               </Nav>
               <Nav>
-                <Nav.Link onClick={() => navigate("/login")}>
-                  Iniciar sesión
-                </Nav.Link>
+                {!isLoggedIn && (
+                  <Button
+                    variant="danger"
+                    onClick={() => navigate("/register")}
+                  >
+                    Registrarse
+                  </Button>
+                )}
               </Nav>
             </Navbar>
           </Navbar.Collapse>

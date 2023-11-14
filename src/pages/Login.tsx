@@ -8,7 +8,8 @@ const Login: React.FC = () => {
 
     // handlers
     function onLogIn(){
-        window.localStorage.setItem('isLoggedIn', 'true');
+      window.localStorage.setItem('isLoggedIn', 'true');
+      window.localStorage.setItem('isAdmin', 'false');
         navigate('/');
 
     }

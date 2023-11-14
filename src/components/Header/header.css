@@ -1,19 +1,25 @@
-.bg-body-tertiary {
-  background-color: #333 !important;
-}
-a {
-  color: rgb(255, 233, 233) !important;
-}
-.dropdown-menu{
+/*bg-body-tertiary*/
+@media (prefers-color-scheme: dark) {
+  .bg-tertiary {
     background-color: #333 !important;
+  }
+  a {
     color: rgb(255, 233, 233) !important;
+  }
+  .dropdown-menu{
+      background-color: #333 !important;
+      color: rgb(255, 233, 233) !important;
+  }
 }
-
 @media (prefers-color-scheme: light) {
-    .bg-body-tertiary {
+    .bg-tertiary {
         background-color: rgb(181, 181, 181) !important;
     }
     a {
         color: black !important;
     }
+    .dropdown-menu{
+      background-color: rgb(181, 181, 181) !important;
+      color: black !important;
+  }
 }
