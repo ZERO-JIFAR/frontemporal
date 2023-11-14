@@ -1,7 +1,7 @@
 import { Empleado } from "../types/Empleado";
 
-const BASE_URL = 'https://fakestoreapi.com'; // <<-----URL A CAMBIAR CON NUESTRA PROPIA API
-
+//const BASE_URL = 'https://fakestoreapi.com'; // <<-----URL A CAMBIAR CON NUESTRA PROPIA API
+const BASE_URL = 'https://sprint5-back-seguridad.onrender.com';
 export const EmpleadosServices = {
 
     //METODO PARA OBTENER TODOS LOS PRODUCTOS

@@ -1,20 +1,24 @@
-export interface Usuario{
-
+export interface Usuario {
     //ACA VAN LOS ATRIBUTOS QUE TIENEN LOS PRODUCTOS DE LA API
-
-    latitud: number;
-    longitud: number;
-    ciudad: string;
-    calle: string;
-    numero: number;
-    codpostal: string;
-    id : number;
-    email: string;
-    username: string;
-    password: string;
-    nombre: string;
-    apellido: string;
-    telefono: string;
-    _v :boolean ;
-
+    address:{
+        geolocation:{
+          lat:string;
+          long:string},
+          city:string;
+          street:string;
+          number:number,
+          zipcode:string},
+      id:number;
+      email:string;
+      username:string;
+      password:string;
+      name:{
+        firstname:string;
+        lastname:string};
+      phone:string;
+      __v:number;
+      rol:TipoUsuario; //ESTE HABRIA QUE VER BIEN EL ORDEN
+      fechaAltaUsuario: string;
+      fechaBajaUsuario: string | null;
+      fechaModificacionUsuario: string | null;
 }

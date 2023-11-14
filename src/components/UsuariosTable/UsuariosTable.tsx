@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Button, Table } from "react-bootstrap";
-import { UsuariosServices } from "../../services/UsuariosServices";
+
 import { ModalType } from "../../types/ModalTypes";
 import { Usuario } from "../../types/Usuarios";
+import UsuarioModal from "../UsuariosModal/UsuariosModal";
+
 import DeleteButton from "../DeleteButton/DeleteButton";
 import EditButton from "../EditButton/EditButton";
 import Loader from "../Loader/Loader";
-import UsuarioModal from "../UsuariosModal/UsuariosModal";
+import { UsuarioService } from "../../services/UsuariosServices";
 
 const UsuariosTable = () => {
   //Variable con los datos recibidos por la API
@@ -23,7 +25,7 @@ const UsuariosTable = () => {
   useEffect(() => {
     //Llamamos a la funcion para obtener TODOS los productos del ProductService
     const fetchUsuarios = async () => {
-      const usuarios = await UsuariosServices.getUsuarios();
+      const usuarios = await UsuarioService.getUsuarios();
       setUsuarios(usuarios);
       setIsLoading(false);
     };
@@ -34,20 +36,24 @@ const UsuariosTable = () => {
 
   const initializableNewUsuario = (): Usuario => {
     return {
-      latitud: 0,
-      longitud: 0,
-      ciudad: "",
-      calle: "",
-      numero: 0,
-      codpostal: "",
-      id: 0,
-      email: "",
-      username: "",
-      password: "",
-      nombre: "",
-      apellido: "",
-      telefono: "",
-      _v: false,
+
+      address:{
+        geolocation:{
+          lat:"",
+          long:""},
+          city:"",
+          street:"",
+          number:0,
+          zipcode:""},
+      id:0,
+      email:"",
+      username:"",
+      password:"",
+      name:{
+        firstname:"",
+        lastname:""},
+      phone:"",
+      __v:0,
     };
   };
 
@@ -84,40 +90,30 @@ const UsuariosTable = () => {
         <Table hover>
           <thead>
             <tr>
-              <th>Latitud</th>
-              <th>Longitud</th>
-              <th>Ciudad</th>
-              <th>Calle</th>
-              <th>Numero</th>
-              <th>Codigo Postal</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
               <th>Email</th>
               <th>Usuario</th>
               <th>Contraseña</th>
-              <th>Nombre</th>
-              <th>Apellido</th>
+              <th>Direccion</th>
               <th>Telefono</th>
               <th>Activo</th>
-              <th>ROL</th>
               <th>Editar</th>
               <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
             {usuarios.map((usuario) => (
+
               <tr key={usuario.id}>
-                <td>{usuario.latitud}</td>
-                <td>{usuario.longitud}</td>
-                <td>{usuario.ciudad}</td>
-                <td>{usuario.calle}</td>
-                <td>{usuario.numero}</td>
-                <td>{usuario.codpostal}</td>
+                <td>{usuario.name.firstname}</td>
+                <td>{usuario.name.lastname}</td>
                 <td>{usuario.email}</td>
                 <td>{usuario.username}</td>
                 <td>{usuario.password}</td>
-                <td>{usuario.nombre}</td>
-                <td>{usuario.apellido}</td>
-                <td>{usuario.telefono}</td>
-                <td>{usuario._v}</td>
+                <td>{usuario.address.street + " " + usuario.address.number + ", " + usuario.address.city}</td>
+                <td>{usuario.phone}</td>
+                <td>{(usuario.__v == 0) ? "True": "False"}</td>
                 <td>
                   <EditButton
                     onClick={() =>

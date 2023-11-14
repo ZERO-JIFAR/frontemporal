@@ -8,7 +8,8 @@ import { useFormik } from "formik";
 
 //Notificaciones al usuario
 import { toast } from "react-toastify";
-import { UsuariosServices } from "../../services/UsuariosServices";
+import { UsuarioService } from "../../services/UsuariosServices";
+
 
 type UsuariosModalProps = {
   show: boolean;
@@ -32,9 +33,9 @@ const UsuarioModal = ({
     try {
       const isNew = user.id === 0;
       if (isNew) {
-        await UsuariosServices.createUsuario(user);
+        await UsuarioService.createUsuario(user);
       } else {
-        await UsuariosServices.updateUsuario(user.id, user);
+        await UsuarioService.updateUsuario(user.id, user);
       }
       toast.success(isNew ? "Usuario Creado" : "Usuario Actualizado", {
         position: "top-center",
@@ -51,7 +52,7 @@ const UsuarioModal = ({
   //DELETE
   const handleDelete = async () => {
     try {
-      await UsuariosServices.deleteUsuario(user.id);
+      await UsuarioService.deleteUsuario(user.id);
 
       toast.success("Usuario eliminado con éxito", {
         position: "top-center",
@@ -150,7 +151,7 @@ const UsuarioModal = ({
                     placeholder="Latitud"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.latitud}
+                    {formik.errors.address?.geolocation?.lat}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -169,7 +170,7 @@ const UsuarioModal = ({
                     placeholder="Longitud"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.longitud}
+                    {formik.errors.address?.geolocation?.long}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -188,7 +189,7 @@ const UsuarioModal = ({
                     placeholder="Ciudad"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.ciudad}
+                    {formik.errors.address?.city}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -207,7 +208,7 @@ const UsuarioModal = ({
                     placeholder="Calle"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.calle}
+                    {formik.errors.address?.street}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -226,7 +227,7 @@ const UsuarioModal = ({
                     placeholder="Numero de Calle"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.numero}
+                    {formik.errors.address?.number}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -245,7 +246,7 @@ const UsuarioModal = ({
                     placeholder="Codigo Postal"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.codpostal}
+                    {formik.errors.address?.zipcode}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -302,7 +303,7 @@ const UsuarioModal = ({
                     placeholder="Nombre"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.nombre}
+                    {formik.errors.name?.firstname}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -321,7 +322,7 @@ const UsuarioModal = ({
                     placeholder="Apellido"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.apellido}
+                    {formik.errors.name?.lastname}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -340,7 +341,7 @@ const UsuarioModal = ({
                     placeholder="Telefono"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.telefono}
+                    {formik.errors.phone}
                   </Form.Control.Feedback>
                 </Form.Group>
 
@@ -357,7 +358,7 @@ const UsuarioModal = ({
                     placeholder="Valido"
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors._v}
+                    {formik.errors.__v}
                   </Form.Control.Feedback>
                 </Form.Group>
 
