@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { UsuarioService } from "../services/UsuariosServices";
 
 
 const Login: React.FC = () => {
@@ -9,7 +10,7 @@ const Login: React.FC = () => {
     // handlers
     function onLogIn(){
       window.localStorage.setItem('isLoggedIn', 'true');
-      window.localStorage.setItem('isAdmin', 'false');
+      window.localStorage.setItem('isAdmin', 'true'); //ACA DEBERIA VER EL ATRIBUTO ADMIN O NO Y PASARLE TRUE O FALSE 
         navigate('/');
 
     }

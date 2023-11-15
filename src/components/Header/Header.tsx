@@ -85,11 +85,10 @@ const Header = () => {
                 </NavDropdown.Item>
               </NavDropdown>
               <Nav.Link href="#footer">Contactanos</Nav.Link>
-              {((isLoggedIn === true) && (isAdmin === true)) ? (
+              { isLoggedIn && isAdmin == 'true' ? (
                 <Nav.Link onClick={() => navigate("/admin")}>Admin</Nav.Link>
-              ) : (
-                <Nav.Link onClick={() => navigate("/admin")}>NO ADMIN</Nav.Link>
-              )}
+              ) : ""}
+              {/*
               <Container>
                 <Form className="me-auto">
                   🔆
@@ -100,6 +99,8 @@ const Header = () => {
                   />
                 </Form>
               </Container>
+              BTN SWITCH THEME Light-Dark
+              */}
             </Nav>
             <Navbar expand="lg">
               <Nav>

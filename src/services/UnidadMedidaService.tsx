@@ -1,7 +1,8 @@
 import { UnidadMedida } from "../types/UnidadMedida";
 
 //const BASE_URL = 'https://fakestoreapi.com';
-const BASE_URL = 'https://sprint5-back-seguridad.onrender.com';
+const BASE_URL = 'http://localhost:8080';
+
 
 export const UnidadMedidaService = {
 

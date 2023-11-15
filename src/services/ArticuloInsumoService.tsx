@@ -2,14 +2,15 @@ import { ArticuloInsumo } from "../types/ArticuloInsumo";
 
 
 //const BASE_URL = 'https://fakestoreapi.com';
-const BASE_URL = 'https://sprint5-back-seguridad.onrender.com';
+const BASE_URL = 'http://localhost:8080';
+
 
 export const ArticuloInsumoService = {
 
     
     getAllArticuloInsumo: async (): Promise<ArticuloInsumo[]> => {
        
-        const response = await fetch(`${BASE_URL}/api/v1/articuloInsumo/paged`);
+        const response = await fetch(`${BASE_URL}/api/v1/articuloInsumos`);
         const data = await response.json();
         return data;
     },
@@ -17,7 +18,7 @@ export const ArticuloInsumoService = {
     
     getArticuloInsumo: async (id:number): Promise<ArticuloInsumo> => {
 
-        const response = await fetch (`${BASE_URL}/api/v1/articuloInsumo/${id}`);
+        const response = await fetch (`${BASE_URL}/api/v1/articuloInsumos/${id}`);
         const data = await response.json();
         return data;
         
@@ -25,7 +26,7 @@ export const ArticuloInsumoService = {
 
     createArticuloInsumo:async (articuloInsumo:ArticuloInsumo):Promise<ArticuloInsumo> => {
 
-        const response = await fetch(`${BASE_URL}/api/v1/articuloInsumo`, {
+        const response = await fetch(`${BASE_URL}/api/v1/articuloInsumos`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +41,7 @@ export const ArticuloInsumoService = {
 
     updateArticuloInsumo: async (id: number, articuloInsumo: ArticuloInsumo): Promise<ArticuloInsumo> => {
         
-        const response = await fetch(`${BASE_URL}/api/v1/articuloInsumo/${id}`, {
+        const response = await fetch(`${BASE_URL}/api/v1/articuloInsumos/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type':'application/json'
@@ -55,7 +56,7 @@ export const ArticuloInsumoService = {
     
 
     deleteArticuloInsumo: async (id:number): Promise<void> => {
-        await fetch(`${BASE_URL}/api/v1/articuloInsumo/${id}`, {
+        await fetch(`${BASE_URL}/api/v1/articuloInsumos/${id}`, {
             method: "DELETE"
         });
     }

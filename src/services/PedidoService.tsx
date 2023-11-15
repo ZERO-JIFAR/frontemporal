@@ -1,25 +1,26 @@
 import { Pedido } from "../types/Pedido";
 
 //const BASE_URL = 'https://fakestoreapi.com';
-const BASE_URL = 'https://sprint5-back-seguridad.onrender.com';
+const BASE_URL = 'http://localhost:8080';
+
 
 export const PedidoService = {
     
     getAllPedidos: async (): Promise<Pedido[]> => {
-        const response = await fetch(`${BASE_URL}/api/v1/pedido/paged`);
+        const response = await fetch(`${BASE_URL}/api/v1/pedidos`);
 
         const data = await response.json();
         return data;
     },
 
     getPedido: async (id: number): Promise<Pedido> => {
-        const response = await fetch(`${BASE_URL}/api/v1/pedido/${id}`);
+        const response = await fetch(`${BASE_URL}/api/v1/pedidos/${id}`);
         const data = await response.json();
         return data;
     },
 
     createPedido: async (pedido: Pedido): Promise<Pedido> => {
-        const response = await fetch(`${BASE_URL}/api/v1/pedido`, {
+        const response = await fetch(`${BASE_URL}/api/v1/pedidos`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -32,7 +33,7 @@ export const PedidoService = {
     },
 
     updatePedido: async (id: number, pedido: Pedido): Promise<Pedido> => {
-        const response = await fetch(`${BASE_URL}/api/v1/pedido/${id}`, {
+        const response = await fetch(`${BASE_URL}/api/v1/pedidos/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +46,7 @@ export const PedidoService = {
     },
 
     deletePedido: async (id: number): Promise<void> => {
-        await fetch(`${BASE_URL}/api/v1/pedido/${id}`, {
+        await fetch(`${BASE_URL}/api/v1/pedidos/${id}`, {
             method: "DELETE"
         });
     }

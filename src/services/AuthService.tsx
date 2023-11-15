@@ -1,7 +1,8 @@
 import { LoginRequest } from "../types/LoginRequest";
 
 //const BASE_URL = 'https://fakestoreapi.com';
-const BASE_URL = 'https://sprint5-back-seguridad.onrender.com';
+const BASE_URL = 'http://localhost:8080';
+
 
 export const AuthService = {
   login: async (loginRequest: LoginRequest): Promise<void> => {
@@ -15,14 +16,11 @@ export const AuthService = {
       });
 
       if (!response.ok) {
-        throw new Error('Inicio de sesión fallido');
+        throw new Error('Inicio de sesión fallido, intenta nuevamente');
       }
 
       // Recuperar el token de las cabeceras de la respuesta
-      //const token = response.headers.get('Authorization');
-
-      // Recuperar el token del cuerpo de la respuesta JSON
-      const token = await response.json();
+      const token = response.headers.get('Authorization');
 
       if (!token) {
         throw new Error('No se encontró el token en las cabeceras de la respuesta');
@@ -31,8 +29,6 @@ export const AuthService = {
       // Almacena el token en localStorage
       localStorage.setItem('token', token);
 
-      // Puedes también almacenar otros datos relacionados con la sesión si es necesario
-      // localStorage.setItem('username', loginRequest.username);
 
     } catch (error) {
       console.error('Error al iniciar sesión:');

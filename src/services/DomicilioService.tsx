@@ -1,23 +1,24 @@
 import { Domicilio } from "../types/Domicilio";
 
 //const BASE_URL = 'https://fakestoreapi.com';
-const BASE_URL = 'https://sprint5-back-seguridad.onrender.com';
+const BASE_URL = 'http://localhost:8080';
+
 
 export const DomicilioService = {
     getAllDomicilios: async (): Promise<Domicilio[]> => {
-        const response = await fetch(`${BASE_URL}/api/v1/domicilio/paged`);
+        const response = await fetch(`${BASE_URL}/api/v1/domicilios`);
         const data = await response.json();
         return data;
     },
 
     getDomicilio: async (id: number): Promise<Domicilio> => {
-        const response = await fetch(`${BASE_URL}/api/v1/domicilio/${id}`);
+        const response = await fetch(`${BASE_URL}/api/v1/domicilios/${id}`);
         const data = await response.json();
         return data;
     },
 
     createDomicilio: async (domicilio: Domicilio): Promise<Domicilio> => {
-        const response = await fetch(`${BASE_URL}/api/v1/domicilio`, {
+        const response = await fetch(`${BASE_URL}/api/v1/domicilios`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -30,7 +31,7 @@ export const DomicilioService = {
     },
 
     updateDomicilio: async (id: number, domicilio: Domicilio): Promise<Domicilio> => {
-        const response = await fetch(`${BASE_URL}/api/v1/domicilio/${id}`, {
+        const response = await fetch(`${BASE_URL}/api/v1/domicilios/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -43,7 +44,7 @@ export const DomicilioService = {
     },
 
     deleteDomicilio: async (id: number): Promise<void> => {
-        await fetch(`${BASE_URL}/api/v1/domicilio/${id}`, {
+        await fetch(`${BASE_URL}/api/v1/domicilios/${id}`, {
             method: "DELETE"
         });
     }

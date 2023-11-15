@@ -1,14 +1,15 @@
 import { Rubro } from "../types/Rubro";
 
 //const BASE_URL = 'https://fakestoreapi.com';
-const BASE_URL = 'https://sprint5-back-seguridad.onrender.com';
+const BASE_URL = 'http://localhost:8080';
+
 
 export const RubroService = {
 
     
     getAllRubro: async (): Promise<Rubro[]> => {
        
-        const response = await fetch(`${BASE_URL}/api/v1/rubro`);
+        const response = await fetch(`${BASE_URL}/api/v1/rubroArticulos`);
         const data = await response.json();
         return data;
     },
@@ -16,7 +17,7 @@ export const RubroService = {
     
     getRubro: async (id:number): Promise<Rubro> => {
 
-        const response = await fetch (`${BASE_URL}/api/v1/rubro/${id}`);
+        const response = await fetch (`${BASE_URL}/api/v1/rubroArticulos/${id}`);
         const data = await response.json();
         return data;
         
@@ -24,7 +25,7 @@ export const RubroService = {
 
     createRubro:async (rubro:Rubro):Promise<Rubro> => {
 
-        const response = await fetch(`${BASE_URL}/api/v1/rubro`, {
+        const response = await fetch(`${BASE_URL}/api/v1/rubroArticulos`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -39,7 +40,7 @@ export const RubroService = {
 
     updateRubro: async (id: number, rubro:Rubro): Promise<Rubro> => {
         
-        const response = await fetch(`${BASE_URL}/api/v1/rubro/${id}`, {
+        const response = await fetch(`${BASE_URL}/api/v1/rubroArticulos/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type':'application/json'
@@ -54,7 +55,7 @@ export const RubroService = {
     
 
     deleteRubro: async (id:number): Promise<void> => {
-        await fetch(`${BASE_URL}/api/v1/rubro/${id}`, {
+        await fetch(`${BASE_URL}/api/v1/rubroArticulos/${id}`, {
             method: "DELETE"
         });
     }

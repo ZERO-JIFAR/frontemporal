@@ -2,24 +2,25 @@ import { detallesPedido } from "../types/DetallePedido";
 
 
 //const BASE_URL = 'https://fakestoreapi.com';
-const BASE_URL = 'https://sprint5-back-seguridad.onrender.com';
+const BASE_URL = 'http://localhost:8080';
+
 
 export const DetallePedidoService = {
     
     getAllDetallesPedido: async (): Promise<detallesPedido[]> => {
-        const response = await fetch(`${BASE_URL}/api/v1/detallePedido/paged`);
+        const response = await fetch(`${BASE_URL}/api/v1/detallePedidos`);
         const data = await response.json();
         return data;
     },
 
     getDetallePedido: async (id: number): Promise<detallesPedido> => {
-        const response = await fetch(`${BASE_URL}/api/v1/detallePedido/${id}`);
+        const response = await fetch(`${BASE_URL}/api/v1/detallePedidos/${id}`);
         const data = await response.json();
         return data;
     },
 
     createDetallePedido: async (detallesPedido: detallesPedido): Promise<detallesPedido> => {
-        const response = await fetch(`${BASE_URL}/api/v1/detallePedido`, {
+        const response = await fetch(`${BASE_URL}/api/v1/detallePedidos`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -32,7 +33,7 @@ export const DetallePedidoService = {
     },
 
     updateDetallePedido: async (id: number, detallePedido: detallesPedido): Promise<detallesPedido> => {
-        const response = await fetch(`${BASE_URL}/api/v1/detallePedido/${id}`, {
+        const response = await fetch(`${BASE_URL}/api/v1/detallePedidos/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +46,7 @@ export const DetallePedidoService = {
     },
 
     deleteDetallePedido: async (id: number): Promise<void> => {
-        await fetch(`${BASE_URL}/api/v1/detallePedido/${id}`, {
+        await fetch(`${BASE_URL}/api/v1/detallePedidos/${id}`, {
             method: "DELETE"
         });
     }
