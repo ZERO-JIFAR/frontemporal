@@ -7,6 +7,7 @@ import DetallePedidoPage from "../pages/DetallePedido";
 import RegisterPage from "../pages/Register";
 import Login from "../pages/Login";
 import UsuariosPage from "../pages/UsuariosPage";
+import RecuperarContrasena from "../pages/RecuperarContrasena";
 
 
 const PrivateRoute = React.lazy(() => import("./PrivateRoute"));
@@ -24,6 +25,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/detalle/:idProduct" element={<DetalleProductoPage />} />
       <Route path="/detallePedido" element={<DetallePedidoPage />} />
       <Route path="/usuarios" element={<UsuariosPage/>} />
+      <Route path="/recuperar" element={<RecuperarContrasena />} />
     </Routes>
   );
 };

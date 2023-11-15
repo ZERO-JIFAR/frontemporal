@@ -1,10 +1,8 @@
 // Importa las bibliotecas necesarias
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap';
-import { Google } from 'react-bootstrap-icons';
 //import { auth, googleProvider } from './firebase'; // Hay que de configurar la BD y obtener la instancia de autenticación
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
 
 const Login: React.FC = () => {
   // utils
@@ -16,7 +14,7 @@ const Login: React.FC = () => {
   // handlers
   function onLogIn() {
     window.localStorage.setItem("isLoggedIn", "true");
-    window.localStorage.setItem("isAdmin", "false"); //ACA DEBERIA VER EL ATRIBUTO ADMIN O NO Y PASARLE TRUE O FALSE
+    window.localStorage.setItem("isAdmin", "true"); //ACA DEBERIA VER EL ATRIBUTO ADMIN O NO Y PASARLE TRUE O FALSE
     navigate("/");
   }
 
@@ -50,7 +48,7 @@ const Login: React.FC = () => {
     <Container>
       <Row className="justify-content-md-center">
         <Col xs={12} md={6}>
-          <h2>Iniciar Sesión</h2>
+          <h2>Recuperar Contraseña</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={onLogIn}> 
           {/*en vez de onLogIn <--> handleLogin */}
@@ -64,31 +62,11 @@ const Login: React.FC = () => {
                 required
               />
             </Form.Group>
-
-            <Form.Group controlId="formPassword">
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Ingresa tu contraseña"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </Form.Group>
-
             <Button variant="primary" type="submit">
-              Iniciar Sesión
+              Recuperar
             </Button>
           </Form>
 
-          <Button variant="danger" onClick={onLogIn}>
-          {/* }handleGoogleLogin} className="mt-3"> */}
-          Inicia Sesion con Google <Google />
-          </Button>
-
-          <p className="mt-3">
-            ¿Olvidaste tu contraseña? <a href=""onClick={() => navigate("/recuperar")}>Restablecer contraseña</a>
-          </p>
         </Col>
       </Row>
     </Container>
