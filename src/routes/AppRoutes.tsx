@@ -8,6 +8,8 @@ import RegisterPage from "../pages/Register";
 import Login from "../pages/Login";
 import UsuariosPage from "../pages/UsuariosPage";
 import RecuperarContrasena from "../pages/RecuperarContrasena";
+import EmpleadosTable from "../components/EmpleadosTable/EmpleadosTable";
+import ClientesTable from "../components/ClientesTable/ClientesTable";
 
 
 const PrivateRoute = React.lazy(() => import("./PrivateRoute"));
@@ -26,6 +28,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/detallePedido" element={<DetallePedidoPage />} />
       <Route path="/usuarios" element={<UsuariosPage/>} />
       <Route path="/recuperar" element={<RecuperarContrasena />} />
+      <Route path="/clientes" element={<ClientesTable />} />
     </Routes>
   );
 };

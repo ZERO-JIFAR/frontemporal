@@ -4,7 +4,7 @@ import { Cliente } from "../types/Cliente";
 const BASE_URL = 'http://localhost:8080';
 
 export const ClienteService = {
-    getAllClientes: async (): Promise<Cliente[]> => {
+    getClientes: async (): Promise<Cliente[]> => {
         const response = await fetch(`${BASE_URL}/api/v1/clientes`);
         const data = await response.json();
         return data;
