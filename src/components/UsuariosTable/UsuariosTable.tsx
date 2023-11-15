@@ -9,6 +9,7 @@ import DeleteButton from "../DeleteButton/DeleteButton";
 import EditButton from "../EditButton/EditButton";
 import Loader from "../Loader/Loader";
 import { UsuarioService } from "../../services/UsuariosServices";
+import { Rol } from "../../types/Rol";
 
 const UsuariosTable = () => {
   //Variable con los datos recibidos por la API
@@ -36,24 +37,28 @@ const UsuariosTable = () => {
 
   const initializableNewUsuario = (): Usuario => {
     return {
+      id: 0,
+      fechaAlta: "",
+      fechaModificacion: null,
+      fechaBaja: null,
+      username: "",
+      password: "",
+      rol: Rol.CLIENTE,
+      activo: false,
 
-      address:{
-        geolocation:{
-          lat:"",
-          long:""},
-          city:"",
-          street:"",
-          number:0,
-          zipcode:""},
-      id:0,
-      email:"",
-      username:"",
-      password:"",
-      name:{
-        firstname:"",
-        lastname:""},
-      phone:"",
-      __v:0,
+      cliente: {
+        id: 0,
+        fechaHoraAltaCliente: "",
+        fechaHoraModificacionCliente: null,
+        fechaHoraBajaCliente: null,
+        nombre: "",
+        apellido: "",
+        telefono: "",
+        email: "",
+        estadoCliente: null,
+        pedidos: [],
+        domicilioList: []
+      },
     };
   };
 
@@ -90,13 +95,13 @@ const UsuariosTable = () => {
         <Table hover>
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Email</th>
+              <th>Id</th>
+              <th>Fecha Alta</th>
+              <th>Fecha Modificacion</th>
+              <th>Fecha Baja</th>
               <th>Usuario</th>
               <th>Contraseña</th>
-              <th>Direccion</th>
-              <th>Telefono</th>
+              <th>ROL</th>
               <th>Activo</th>
               <th>Editar</th>
               <th>Eliminar</th>
@@ -104,16 +109,15 @@ const UsuariosTable = () => {
           </thead>
           <tbody>
             {usuarios.map((usuario) => (
-
               <tr key={usuario.id}>
-                <td>{usuario.name.firstname}</td>
-                <td>{usuario.name.lastname}</td>
-                <td>{usuario.email}</td>
-                <td>{usuario.username}</td>
-                <td>{usuario.password}</td>
-                <td>{usuario.address.street + " " + usuario.address.number + ", " + usuario.address.city}</td>
-                <td>{usuario.phone}</td>
-                <td>{(usuario.__v == 0) ? "True": "False"}</td>
+                <td>{usuario.id ? usuario.id : "vacio"}</td>
+                <td>{usuario.fechaAlta ? usuario.fechaAlta : "vacio"}</td>
+                <td>{usuario.fechaModificacion ? usuario.fechaModificacion : "vacio"}</td>
+                <td>{usuario.fechaBaja ? usuario.fechaBaja : "vacio"}</td>
+                <td>{usuario.username ? usuario.username : "vacio"}</td>
+                <td>{usuario.password ? usuario.password : "vacio"}</td>
+                <td>{usuario.rol ? usuario.rol : "vacio"}</td>
+                <td>{usuario.activo.toString()}</td>
                 <td>
                   <EditButton
                     onClick={() =>

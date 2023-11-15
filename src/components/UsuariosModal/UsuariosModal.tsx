@@ -1,6 +1,8 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import { ModalType } from "../../types/ModalTypes";
 import { Usuario } from "../../types/Usuarios";
+import { Rol } from "../../types/Rol";
+import { UsuarioService } from "../../services/UsuariosServices";
 
 //Dependencias para la validacion de datos de formularios
 import * as Yup from "yup";
@@ -8,8 +10,6 @@ import { useFormik } from "formik";
 
 //Notificaciones al usuario
 import { toast } from "react-toastify";
-import { UsuarioService } from "../../services/UsuariosServices";
-
 
 type UsuariosModalProps = {
   show: boolean;
@@ -67,25 +67,11 @@ const UsuarioModal = ({
   //Yup, esquema de validacion.
   const validationSchema = () => {
     return Yup.object().shape({
-      latitud: Yup.number().integer().min(0),
-      longitud: Yup.number().integer().min(0),
-      ciudad: Yup.string().required("Ingrese CIUDAD por favor"),
-      calle: Yup.string().required("Ingrese CALLE por favor"),
-      numero: Yup.number()
-        .integer()
-        .min(0)
-        .required("Ingrese NUMERO por favor"),
-      codpostal: Yup.string().min(0).max(4),
       id: Yup.number().integer().min(0),
-      email: Yup.string().required("Ingrese EMAIL por favor"),
       username: Yup.string().required("Ingrese USERNAME por favor"),
       password: Yup.string().required("Ingrese CONTRASEÑA por favor"),
-      nombre: Yup.string().required("Ingrese NOMBRE por favor"),
-      apellido: Yup.string().required("Ingrese APELLIDO por favor"),
-      telefono: Yup.string().required("Ingrese TELEFONO por favor"),
-      _v: Yup.boolean().required(
-        "Es necesario saber si esta activo o inactivo"
-      ),
+      ROL: Yup.mixed().oneOf(Object.values(Rol)),
+      activo: Yup.boolean(),
     });
   };
 
@@ -136,123 +122,28 @@ const UsuarioModal = ({
             </Modal.Header>
             <Modal.Body>
               <Form onSubmit={formik.handleSubmit}>
-                {/*ESTE GROUP ES PARA EL CAMPO LATITUD*/}
-                <Form.Group controlId="formlatitud">
-                  <Form.Label>Latitud</Form.Label>
+                {/*ESTE GROUP ES PARA EL CAMPO ID*/}
+                <Form.Group controlId="formid">
+                  <Form.Label>Id</Form.Label>
                   <Form.Control
-                    name="latitud"
-                    type="text"
-                    value={formik.values.latitud || ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.latitud && formik.touched.latitud
-                    )}
-                    placeholder="Latitud"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.address?.geolocation?.lat}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/*ESTE GROUP ES PARA EL CAMPO LONGITUD*/}
-                <Form.Group controlId="formlongitud">
-                  <Form.Label>Longitud</Form.Label>
-                  <Form.Control
-                    name="longitud"
-                    type="text"
-                    value={formik.values.longitud || ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.longitud && formik.touched.longitud
-                    )}
-                    placeholder="Longitud"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.address?.geolocation?.long}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/*ESTE GROUP ES PARA EL CAMPO CIUDAD*/}
-                <Form.Group controlId="formciudad">
-                  <Form.Label>Ciudad</Form.Label>
-                  <Form.Control
-                    name="ciudad"
-                    type="text"
-                    value={formik.values.ciudad || ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.ciudad && formik.touched.ciudad
-                    )}
-                    placeholder="Ciudad"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.address?.city}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/*ESTE GROUP ES PARA EL CAMPO CALLE*/}
-                <Form.Group controlId="formcalle">
-                  <Form.Label>Calle</Form.Label>
-                  <Form.Control
-                    name="calle"
-                    type="text"
-                    value={formik.values.calle || ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.calle && formik.touched.calle
-                    )}
-                    placeholder="Calle"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.address?.street}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/*ESTE GROUP ES PARA EL CAMPO NUMERO*/}
-                <Form.Group controlId="formnumero">
-                  <Form.Label>Numero</Form.Label>
-                  <Form.Control
-                    name="Numero"
+                    name="Id"
                     type="number"
-                    value={formik.values.numero || ""}
+                    value={formik.values.id || ""}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.numero && formik.touched.numero
-                    )}
-                    placeholder="Numero de Calle"
+                    isInvalid={Boolean(formik.errors.id && formik.touched.id)}
+                    placeholder="Id"
+                    disabled
+                    readOnly
                   />
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.address?.number}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/*ESTE GROUP ES PARA EL CAMPO COD-POSTAL*/}
-                <Form.Group controlId="formcodpostal">
-                  <Form.Label>Codigo Postal</Form.Label>
-                  <Form.Control
-                    name="codpostal"
-                    type="text"
-                    value={formik.values.codpostal || ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.codpostal && formik.touched.codpostal
-                    )}
-                    placeholder="Codigo Postal"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.address?.zipcode}
+                    {formik.errors.id}
                   </Form.Control.Feedback>
                 </Form.Group>
 
                 {/*ESTE GROUP ES PARA EL CAMPO USERNAME*/}
                 <Form.Group controlId="formusername">
-                  <Form.Label>UserName</Form.Label>
+                  <Form.Label>Username</Form.Label>
                   <Form.Control
                     name="username"
                     type="text"
@@ -269,7 +160,7 @@ const UsuarioModal = ({
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                {/*ESTE GROUP ES PARA EL CAMPO PASSWORD*/}
+                {/*ESTE GROUP ES PARA EL CAMPO password*/}
                 <Form.Group controlId="formpassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
@@ -282,83 +173,47 @@ const UsuarioModal = ({
                       formik.errors.password && formik.touched.password
                     )}
                     placeholder="Password"
+                    disabled
+                    readOnly
                   />
                   <Form.Control.Feedback type="invalid">
                     {formik.errors.password}
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                {/*ESTE GROUP ES PARA EL CAMPO NOMBRE*/}
-                <Form.Group controlId="formnombre">
-                  <Form.Label>Nombre</Form.Label>
-                  <Form.Control
-                    name="nombre"
-                    type="text"
-                    value={formik.values.nombre || ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.nombre && formik.touched.nombre
-                    )}
-                    placeholder="Nombre"
-                  />
+                {/*ESTE GROUP ES PARA EL CAMPO ROL*/}
+                <Form.Group controlId="formrol">
+                  <Form.Label>Rol</Form.Label>
+                  <Form.Select aria-label="Default select example" id="mySelect" className="mySelect"
+                  name="rol"
+                  defaultValue={Object.values(Rol).indexOf(user.rol)}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  isInvalid={Boolean(formik.errors.rol && formik.touched.rol)}>
+                    <option value="CLIENTE">{Rol[0]}</option>
+                    <option value="CAJERO">{Rol[1]}</option>
+                    <option value="COCINERO">{Rol[2]}</option>
+                    <option value="DELIVERY">{Rol[3]}</option>
+                  </Form.Select>
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.name?.firstname}
+                    {formik.errors.rol}
                   </Form.Control.Feedback>
                 </Form.Group>
 
-                {/*ESTE GROUP ES PARA EL CAMPO APELLIDO*/}
-                <Form.Group controlId="formapellido">
-                  <Form.Label>Apellido</Form.Label>
-                  <Form.Control
-                    name="apellido"
-                    type="text"
-                    value={formik.values.apellido || ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.apellido && formik.touched.apellido
-                    )}
-                    placeholder="Apellido"
-                  />
+                {/*ESTE GROUP ES PARA EL CAMPO ACTIVO*/}
+                <Form.Group controlId="formactivo">
+                  <Form.Label>Activo</Form.Label>
+                  <Form.Select aria-label="Default select example"
+                  name="activo"
+                  value={formik.values.activo.toString() || ""}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  isInvalid={Boolean(formik.errors.activo && formik.touched.activo)}>
+                    <option value="True" >Activo</option>
+                    <option value="False">Inactivo</option>
+                  </Form.Select>
                   <Form.Control.Feedback type="invalid">
-                    {formik.errors.name?.lastname}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/*ESTE GROUP ES PARA EL CAMPO TELEFONO*/}
-                <Form.Group controlId="formtelefono">
-                  <Form.Label>Telefono</Form.Label>
-                  <Form.Control
-                    name="telefono"
-                    type="text"
-                    value={formik.values.telefono || ""}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(
-                      formik.errors.telefono && formik.touched.telefono
-                    )}
-                    placeholder="Telefono"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.phone}
-                  </Form.Control.Feedback>
-                </Form.Group>
-
-                {/*ESTE GROUP ES PARA EL CAMPO VALIDO*/}
-                <Form.Group controlId="formvalido">
-                  <Form.Label>Valido</Form.Label>
-                  <Form.Control
-                    name="valido"
-                    type="boolean"
-                    /*value={formik.values._v || ''} -----------------REVISAR ESTA PARTE*/
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    isInvalid={Boolean(formik.errors._v && formik.touched._v)}
-                    placeholder="Valido"
-                  />
-                  <Form.Control.Feedback type="invalid">
-                    {formik.errors.__v}
+                    {formik.errors.activo}
                   </Form.Control.Feedback>
                 </Form.Group>
 

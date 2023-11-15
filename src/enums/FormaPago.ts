@@ -1,4 +1,6 @@
 enum FormaPago {
     MERCADO_PAGO = "MERCADO_PAGO",
-    
+    EFECTIVO = "EFECTIVO",
+    TJ_CREDITO = "TJ_CREDITO",
+    TJ_DEBITO = "TJ_DEBITO",
   }
